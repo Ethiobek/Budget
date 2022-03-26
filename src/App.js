@@ -2,6 +2,7 @@ import "./App.css";
 import React from "react";
 import "semantic-ui-css/semantic.min.css";
 import {
+  Button,
   Container,
   Form,
   FormGroup,
@@ -109,6 +110,11 @@ function App() {
             iconPosition="left"
           />
         </Form.Group>
+        <Button.Group style={{ marginTop: 10 }}>
+          <Button color="red">Cancel</Button>
+          <Button.Or />
+          <Button primary>Ok</Button>
+        </Button.Group>
       </Form>
     </Container>
   );
