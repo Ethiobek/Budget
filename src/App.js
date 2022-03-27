@@ -14,6 +14,7 @@ import {
   Statistic,
 } from "semantic-ui-react";
 import MainHeader from "./components/MainHeader";
+import ButtonSaveOrCancel from "./components/ButtonSaveOrCancel";
 
 function App() {
   return (
@@ -111,11 +112,7 @@ function App() {
             iconPosition="left"
           />
         </Form.Group>
-        <Button.Group style={{ marginTop: 10 }}>
-          <Button color="red">Cancel</Button>
-          <Button.Or />
-          <Button primary>Ok</Button>
-        </Button.Group>
+        <ButtonSaveOrCancel />
       </Form>
     </Container>
   );
