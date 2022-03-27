@@ -14,6 +14,7 @@ import {
 import MainHeader from "./components/MainHeader";
 import NewEntryForm from "./components/NewEntryForm";
 import StatisticBalance from "./components/StatisticBalance";
+import ListHistory from "./components/ListHistory";
 
 function App() {
   return (
@@ -46,54 +47,9 @@ function App() {
         </Grid>
       </Segment>
       <MainHeader type="h3" title="History" />
-      <Segment color="red">
-        <Grid columns={3}>
-          <Grid.Row>
-            <Grid.Column width={10} textAlign="left">
-              Something
-            </Grid.Column>
-            <Grid.Column width={3} textAlign="right">
-              $10,00
-            </Grid.Column>
-            <Grid.Column width={3}>
-              <Icon name="edit" bordered />
-              <Icon name="trash" bordered />
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Segment>
-      <Segment color="black">
-        <Grid columns={3}>
-          <Grid.Row>
-            <Grid.Column width={10} textAlign="left">
-              Something else
-            </Grid.Column>
-            <Grid.Column width={3} textAlign="right">
-              $100,00
-            </Grid.Column>
-            <Grid.Column width={3}>
-              <Icon name="edit" bordered />
-              <Icon name="trash" bordered />
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Segment>
-      <Segment color="green">
-        <Grid columns={3}>
-          <Grid.Row>
-            <Grid.Column width={10} textAlign="left">
-              Something new
-            </Grid.Column>
-            <Grid.Column width={3} textAlign="right">
-              $20,00
-            </Grid.Column>
-            <Grid.Column width={3}>
-              <Icon name="edit" bordered />
-              <Icon name="trash" bordered />
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Segment>
+      <ListHistory message="Buy Toshiba Laptop" value="1,152.00" isExpense />
+      <ListHistory message="Graphics Design" value="250.00" />
+      <ListHistory message="Gaming Chair" value="450.00" isExpense />
       <MainHeader title="Add new transaction" type="h3" />
       <NewEntryForm />
     </Container>
