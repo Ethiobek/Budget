@@ -1,5 +1,5 @@
 import "./App.css";
-import React from "react";
+import React, { useState } from "react";
 import "semantic-ui-css/semantic.min.css";
 import {
   Button,
@@ -17,6 +17,8 @@ import StatisticBalance from "./components/StatisticBalance";
 import ListHistory from "./components/ListHistory";
 
 function App() {
+  const [entries, setEntries] = useState(intialEntry);
+
   return (
     <Container>
       <MainHeader title="Budget App" />
@@ -47,9 +49,14 @@ function App() {
         </Grid>
       </Segment>
       <MainHeader type="h3" title="History" />
-      <ListHistory message="Buy Toshiba Laptop" value="1,152.00" isExpense />
-      <ListHistory message="Graphics Design" value="250.00" />
-      <ListHistory message="Gaming Chair" value="450.00" isExpense />
+      {entries.map((entry) => (
+        <ListHistory
+          message={entry.message}
+          value={entry.value}
+          isExpense={entry.isExpense}
+        />
+      ))}
+
       <MainHeader title="Add new transaction" type="h3" />
       <NewEntryForm />
     </Container>
@@ -57,3 +64,8 @@ function App() {
 }
 
 export default App;
+
+const intialEntry = [
+  { message: "Salary from Remote Job", value: "$6,000.00", isExpense: false },
+  { message: "Internet Cost", value: "$67.00", isExpense: true },
+];
