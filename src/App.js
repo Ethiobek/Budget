@@ -13,6 +13,7 @@ import {
 } from "semantic-ui-react";
 import MainHeader from "./components/MainHeader";
 import NewEntryForm from "./components/NewEntryForm";
+import StatisticBalance from "./components/StatisticBalance";
 
 function App() {
   return (
@@ -26,20 +27,20 @@ function App() {
         <Grid columns={2} divided>
           <Grid.Row>
             <Grid.Column>
-              <Statistic size="tiny" color="green">
-                <Statistic.Label style={{ textAlign: "left" }}>
-                  Incoming:
-                </Statistic.Label>
-                <Statistic.Value>1,045.50</Statistic.Value>
-              </Statistic>
+              <StatisticBalance
+                size="tiny"
+                color="green"
+                label="Income:"
+                value="10,458.50"
+              />
             </Grid.Column>
             <Grid.Column>
-              <Statistic size="tiny" color="red">
-                <Statistic.Label style={{ textAlign: "left" }}>
-                  Exspenses:
-                </Statistic.Label>
-                <Statistic.Value>623.50</Statistic.Value>
-              </Statistic>
+              <StatisticBalance
+                size="tiny"
+                color="red"
+                label="Expenses:"
+                value="4,200.54"
+              />
             </Grid.Column>
           </Grid.Row>
         </Grid>
