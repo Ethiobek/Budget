@@ -14,10 +14,16 @@ import {
 import MainHeader from "./components/MainHeader";
 import NewEntryForm from "./components/NewEntryForm";
 import StatisticBalance from "./components/StatisticBalance";
-import ListHistory from "./components/ListHistory";
-
+import EntryLines from "./components/EntryLines";
 function App() {
   const [entries, setEntries] = useState(intialEntry);
+
+  function deleteEntry(id) {
+    const result = entries.filter((entry) => entry.id !== id);
+    console.log(`entries`, entries);
+    console.log(`result`, result);
+    setEntries(result);
+  }
 
   return (
     <Container>
@@ -49,14 +55,7 @@ function App() {
         </Grid>
       </Segment>
       <MainHeader type="h3" title="History" />
-      {entries.map((entry) => (
-        <ListHistory
-          message={entry.message}
-          value={entry.value}
-          isExpense={entry.isExpense}
-        />
-      ))}
-
+      <EntryLines entries={entries} deleteEntry={deleteEntry} />
       <MainHeader title="Add new transaction" type="h3" />
       <NewEntryForm />
     </Container>
@@ -66,6 +65,12 @@ function App() {
 export default App;
 
 const intialEntry = [
-  { message: "Salary from Remote Job", value: "$6,000.00", isExpense: false },
-  { message: "Internet Cost", value: "$67.00", isExpense: true },
+  {
+    id: 1,
+    message: "Salary from Remote Job",
+    value: "$6,000.00",
+    isExpense: false,
+  },
+  { id: 2, message: "Internet Cost", value: "$67.00", isExpense: true },
+  { id: 3, message: "Transport Cost", value: "$147.00", isExpense: true },
 ];
