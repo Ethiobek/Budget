@@ -1,12 +1,19 @@
 import React, { map } from "react";
 import { Container } from "semantic-ui-react";
-import ListHistory from "./ListHistory";
+import EntryLine from "./EntryLine";
 
-function EntryLines({ entries, deleteEntry }) {
+function EntryLines({ entries, deleteEntry, editEntry, isOpen, setIsOpen }) {
   return (
     <Container>
       {entries.map((entry) => (
-        <ListHistory key={entry.id} {...entry} deleteEntry={deleteEntry} />
+        <EntryLine
+          key={entry.id}
+          {...entry}
+          deleteEntry={deleteEntry}
+          editEntry={editEntry}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+        />
       ))}
     </Container>
   );

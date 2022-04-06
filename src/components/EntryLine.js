@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { Segment, Grid, Icon, Button } from "semantic-ui-react";
 import ModalEdit from "./ModalEdit";
-function ListHistory({
+function EntryLine({
   id,
   description,
   value,
   isExpense = false,
   deleteEntry,
+  editEntry,
+  isOpen,
+  setIsOpen,
 }) {
-  const [isOpen, setIsOpen] = useState(false);
   return (
     <>
       <Segment color={isExpense ? "red" : "green"}>
@@ -21,15 +23,14 @@ function ListHistory({
               {value}
             </Grid.Column>
             <Grid.Column width={3}>
-              <Icon name="edit" onClick={() => setIsOpen(true)} bordered />
+              <Icon name="edit" onClick={() => editEntry(id)} bordered />
               <Icon name="trash" onClick={() => deleteEntry(id)} bordered />
             </Grid.Column>
           </Grid.Row>
         </Grid>
       </Segment>
-      <ModalEdit isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 }
 
-export default ListHistory;
+export default EntryLine;

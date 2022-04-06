@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Checkbox, Form, Segment } from "semantic-ui-react";
 
 function EntryForm({
@@ -10,10 +10,10 @@ function EntryForm({
   setisExpense,
 }) {
   return (
-    <Segment>
-      <Form.Group>
+    <Fragment>
+      <Form.Group widths={3}>
         <Form.Input
-          icon="tag"
+          icon="tags"
           width={12}
           label="Description"
           placeholder="Name of the transaction"
@@ -22,7 +22,7 @@ function EntryForm({
         />
         <Form.Input
           icon="dollar"
-          width={4}
+          width={2}
           label="Value"
           placeholder="100.00"
           iconPosition="left"
@@ -30,15 +30,16 @@ function EntryForm({
           onChange={(event) => setValue(event.target.value)}
         />
       </Form.Group>
-      <Segment>
+      <Segment compact>
         <Checkbox
           value={isExpense}
+          checked={isExpense}
           onChange={(event) => setisExpense((oldstate) => !oldstate)}
           toggle
           label="is expense"
         />
       </Segment>
-    </Segment>
+    </Fragment>
   );
 }
 

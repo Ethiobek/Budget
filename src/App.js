@@ -6,13 +6,14 @@ import MainHeader from "./components/MainHeader";
 import NewEntryForm from "./components/NewEntryForm";
 import StatisticBalance from "./components/StatisticBalance";
 import EntryLines from "./components/EntryLines";
+import ModalEdit from "./components/ModalEdit";
 function App({ addEntry }) {
   // Put every states hear
   const [description, setDescription] = useState("");
   const [value, setValue] = useState("");
   const [isExpense, setisExpense] = useState(false);
-
   const [entries, setEntries] = useState(intialEntry);
+  const [isOpen, setIsOpen] = useState(false);
 
   function deleteEntry(id) {
     const result = entries.filter((entry) => entry.id !== id);
@@ -31,6 +32,17 @@ function App({ addEntry }) {
     setEntries(result);
   }
 
+  function editEntry(id) {
+    console.log(`edit entry ${id}`);
+    if (id) {
+      const index = entries.findIndex((entry) => entry.id === id);
+      const entry = entries[index];
+      setDescription(entry.description);
+      setValue(entry.value);
+      setisExpense(entry.isExpense);
+      setIsOpen(true);
+    }
+  }
   return (
     <Container>
       <MainHeader title="Budget App" />
@@ -61,7 +73,13 @@ function App({ addEntry }) {
         </Grid>
       </Segment>
       <MainHeader type="h3" title="History" />
-      <EntryLines entries={entries} deleteEntry={deleteEntry} />
+      <EntryLines
+        entries={entries}
+        editEntry={editEntry}
+        deleteEntry={deleteEntry}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      />
       <MainHeader title="Add new transaction" type="h3" />
       <NewEntryForm
         addEntry={addEntry}
@@ -71,6 +89,17 @@ function App({ addEntry }) {
         setDescription={setDescription}
         setisExpense={setisExpense}
         setValue={setValue}
+      />
+      <ModalEdit
+        addEntry={addEntry}
+        isExpense={isExpense}
+        description={description}
+        value={value}
+        setDescription={setDescription}
+        setisExpense={setisExpense}
+        setValue={setValue}
+        setIsOpen={setIsOpen}
+        isOpen={isOpen}
       />
     </Container>
   );

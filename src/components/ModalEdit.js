@@ -1,17 +1,37 @@
 import React from "react";
-import { Button, Modal, Segment } from "semantic-ui-react";
+import { Button, Icon, Modal, Segment } from "semantic-ui-react";
 import EntryForm from "./EntryForm";
 
-function ModalEdit({ isOpen, setIsOpen }) {
+function ModalEdit({
+  isOpen,
+  setIsOpen,
+  setDescription,
+  setValue,
+  setisExpense,
+  description,
+  isExpense,
+  value,
+}) {
   return (
     <Modal open={isOpen}>
       <Modal.Header>Edit transaction</Modal.Header>
       <Modal.Content>
-        <EntryForm />
+        <EntryForm
+          setDescription={setDescription}
+          setValue={setValue}
+          setisExpense={setisExpense}
+          description={description}
+          value={value}
+          isExpense={isExpense}
+        />
       </Modal.Content>
       <Modal.Actions>
         <Button close onClick={() => setIsOpen(false)}>
           Close
+        </Button>
+        <Button onClick={() => setIsOpen(false)} primary icon="tags">
+          <Icon name="save"></Icon>
+          Save
         </Button>
       </Modal.Actions>
     </Modal>
