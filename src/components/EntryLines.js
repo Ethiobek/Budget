@@ -1,4 +1,4 @@
-import React, { map } from "react";
+import React from "react";
 import { Container } from "semantic-ui-react";
 import EntryLine from "./EntryLine";
 

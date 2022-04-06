@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { Segment, Grid, Icon, Button } from "semantic-ui-react";
-import ModalEdit from "./ModalEdit";
+import React from "react";
+import { Segment, Grid, Icon } from "semantic-ui-react";
 function EntryLine({
   id,
   description,
@@ -8,8 +7,6 @@ function EntryLine({
   isExpense = false,
   deleteEntry,
   editEntry,
-  isOpen,
-  setIsOpen,
 }) {
   return (
     <>

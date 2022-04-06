@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Icon, Modal, Segment } from "semantic-ui-react";
+import { Button, Icon, Modal } from "semantic-ui-react";
 import EntryForm from "./EntryForm";
 
 function ModalEdit({

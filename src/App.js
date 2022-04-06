@@ -7,7 +7,7 @@ import NewEntryForm from "./components/NewEntryForm";
 import StatisticBalance from "./components/StatisticBalance";
 import EntryLines from "./components/EntryLines";
 import ModalEdit from "./components/ModalEdit";
-function App({ addEntry }) {
+function App() {
   // Put every states hear
   const [description, setDescription] = useState("");
   const [value, setValue] = useState("");
@@ -49,7 +49,7 @@ function App({ addEntry }) {
     }
   }
 
-  function addEntry(description, value, isExpense) {
+  function addEntry() {
     const result = entries.concat({
       id: entries.length + 1,
       description,
