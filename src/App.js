@@ -16,6 +16,10 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [entryId, setEntryId] = useState();
 
+  const [totalExpenseValue, setTotalExpenseValue] = useState(0);
+  const [totalIncomeValue, setTotalIncomeValue] = useState(0);
+  const [balance, setBalance] = useState(0);
+
   useEffect(() => {
     if (!isOpen && entryId) {
       const index = entries.findIndex((entry) => entry.id === entryId);
@@ -27,6 +31,21 @@ function App() {
       resetEntries();
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    let totalExpenses = 0;
+    let totalIncomes = 0;
+    entries.map((entry) => {
+      if (entry.isExpense) {
+        return (totalExpenses += Number(entry.value));
+      }
+      return (totalIncomes += Number(entry.value));
+    });
+    let balance = totalIncomes - totalExpenses;
+    setBalance(balance);
+    setTotalIncomeValue(totalIncomes);
+    setTotalExpenseValue(totalExpenses);
+  }, [entries]);
 
   function deleteEntry(id) {
     const result = entries.filter((entry) => entry.id !== id);
@@ -57,6 +76,7 @@ function App() {
       isExpense,
     });
     setEntries(result);
+    resetEntries();
   }
 
   // Reseting the values of the entries to default value
@@ -71,7 +91,9 @@ function App() {
       <MainHeader title="Budget App" />
       <Statistic size="small">
         <Statistic.Label>Your balance: </Statistic.Label>
-        <Statistic.Value>5,854.78 </Statistic.Value>
+        <Statistic.Value value={balance} balance={balance}>
+          {balance}
+        </Statistic.Value>
       </Statistic>
       <Segment textAlign="center" color="grey">
         <Grid columns={2} divided>
@@ -81,7 +103,8 @@ function App() {
                 size="tiny"
                 color="green"
                 label="Income:"
-                value="10,458.50"
+                value={totalIncomeValue}
+                totalIncomeValue={totalIncomeValue}
               />
             </Grid.Column>
             <Grid.Column>
@@ -89,7 +112,8 @@ function App() {
                 size="tiny"
                 color="red"
                 label="Expenses:"
-                value="4,200.54"
+                value={totalExpenseValue}
+                totalExpenseValue={totalExpenseValue}
               />
             </Grid.Column>
           </Grid.Row>
@@ -135,9 +159,19 @@ const intialEntry = [
   {
     id: 1,
     description: "Salary from Remote Job",
-    value: "$6,000.00",
+    value: 6000,
     isExpense: false,
   },
-  { id: 2, description: "Internet Cost", value: "$67.00", isExpense: true },
-  { id: 3, description: "Transport Cost", value: "$147.00", isExpense: true },
+  {
+    id: 2,
+    description: "Internet Cost for April month!",
+    value: 1000,
+    isExpense: true,
+  },
+  {
+    id: 3,
+    description: "Transport Cost to travel to Jordan!",
+    value: 2536,
+    isExpense: true,
+  },
 ];
