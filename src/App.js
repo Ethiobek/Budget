@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "semantic-ui-css/semantic.min.css";
 import { Container, Grid, Segment, Statistic } from "semantic-ui-react";
 import MainHeader from "./components/MainHeader";
@@ -14,12 +14,39 @@ function App({ addEntry }) {
   const [isExpense, setisExpense] = useState(false);
   const [entries, setEntries] = useState(intialEntry);
   const [isOpen, setIsOpen] = useState(false);
+  const [entryId, setEntryId] = useState();
+
+  useEffect(() => {
+    if (!isOpen && entryId) {
+      const index = entries.findIndex((entry) => entry.id === entryId);
+      const newEntries = [...entries];
+      newEntries[index].description = description;
+      newEntries[index].value = value;
+      newEntries[index].isExpense = isExpense;
+      setEntries(newEntries);
+      resetEntries();
+    }
+  }, [isOpen]);
 
   function deleteEntry(id) {
     const result = entries.filter((entry) => entry.id !== id);
     console.log(`entries`, entries);
     console.log(`result`, result);
     setEntries(result);
+  }
+
+  function editEntry(id) {
+    console.log(`edit entry ${id}`);
+    if (id) {
+      const index = entries.findIndex((entry) => entry.id === id);
+      const entry = entries[index];
+      setEntryId(entry.id);
+      setDescription(entry.description);
+      setValue(entry.value);
+      setisExpense(entry.isExpense);
+      setIsOpen(true);
+      console.log(entries);
+    }
   }
 
   function addEntry(description, value, isExpense) {
@@ -32,17 +59,13 @@ function App({ addEntry }) {
     setEntries(result);
   }
 
-  function editEntry(id) {
-    console.log(`edit entry ${id}`);
-    if (id) {
-      const index = entries.findIndex((entry) => entry.id === id);
-      const entry = entries[index];
-      setDescription(entry.description);
-      setValue(entry.value);
-      setisExpense(entry.isExpense);
-      setIsOpen(true);
-    }
+  // Reseting the values of the entries to default value
+  function resetEntries() {
+    setDescription("");
+    setValue("");
+    setisExpense(true);
   }
+
   return (
     <Container>
       <MainHeader title="Budget App" />
@@ -100,6 +123,7 @@ function App({ addEntry }) {
         setValue={setValue}
         setIsOpen={setIsOpen}
         isOpen={isOpen}
+        entryId={entryId}
       />
     </Container>
   );

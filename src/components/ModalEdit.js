@@ -29,7 +29,7 @@ function ModalEdit({
         <Button close onClick={() => setIsOpen(false)}>
           Close
         </Button>
-        <Button onClick={() => setIsOpen(false)} primary icon="tags">
+        <Button onClick={() => setIsOpen(false)} primary>
           <Icon name="save"></Icon>
           Save
         </Button>
