@@ -7,31 +7,21 @@ import NewEntryForm from "./components/NewEntryForm";
 import StatisticBalance from "./components/StatisticBalance";
 import EntryLines from "./components/EntryLines";
 import ModalEdit from "./components/ModalEdit";
+import CurrencyFormat from "react-currency-format";
+import CountSession from "./components/CountSession";
 function App() {
-  // Put every states hear
+  // States fot the system are hear
   const [description, setDescription] = useState("");
   const [value, setValue] = useState("");
   const [isExpense, setisExpense] = useState(false);
   const [entries, setEntries] = useState(intialEntry);
   const [isOpen, setIsOpen] = useState(false);
   const [entryId, setEntryId] = useState();
-
   const [totalExpenseValue, setTotalExpenseValue] = useState(0);
   const [totalIncomeValue, setTotalIncomeValue] = useState(0);
   const [balance, setBalance] = useState(0);
 
-  useEffect(() => {
-    if (!isOpen && entryId) {
-      const index = entries.findIndex((entry) => entry.id === entryId);
-      const newEntries = [...entries];
-      newEntries[index].description = description;
-      newEntries[index].value = value;
-      newEntries[index].isExpense = isExpense;
-      setEntries(newEntries);
-      resetEntries();
-    }
-  }, [isOpen]);
-
+  //Updating the UI/UX -> calculating the totalExpense, totalIncome and Current balance
   useEffect(() => {
     let totalExpenses = 0;
     let totalIncomes = 0;
@@ -67,7 +57,21 @@ function App() {
       console.log(entries);
     }
   }
-
+  // Edit list history from the previous entry
+  useEffect(() => {
+    if (!isOpen && entryId) {
+      const index = entries.findIndex((entry) => entry.id === entryId);
+      //For the specfic entry ID, update elements
+      //index holds the specific element
+      const newEntries = [...entries];
+      newEntries[index].description = description;
+      newEntries[index].value = value;
+      newEntries[index].isExpense = isExpense;
+      //Updating the entry with the current updated values
+      setEntries(newEntries);
+      resetEntries(); // this helps to clear the previous entries in the text fields
+    }
+  }, [isOpen]);
   function addEntry() {
     const result = entries.concat({
       id: entries.length + 1,
@@ -89,10 +93,16 @@ function App() {
   return (
     <Container>
       <MainHeader title="Budget App" />
+      <CountSession />
       <Statistic size="small">
         <Statistic.Label>Your balance: </Statistic.Label>
-        <Statistic.Value value={balance} balance={balance}>
-          {balance}
+        <Statistic.Value currency value={balance} balance={balance}>
+          <CurrencyFormat
+            value={balance}
+            displayType={"text"}
+            thousandSeparator={true}
+            suffix={" Birr"}
+          />
         </Statistic.Value>
       </Statistic>
       <Segment textAlign="center" color="grey">

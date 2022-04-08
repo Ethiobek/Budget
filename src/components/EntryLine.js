@@ -1,4 +1,5 @@
 import React from "react";
+import CurrencyFormat from "react-currency-format";
 import { Segment, Grid, Icon } from "semantic-ui-react";
 function EntryLine({
   id,
@@ -17,7 +18,12 @@ function EntryLine({
               {description}
             </Grid.Column>
             <Grid.Column width={3} textAlign="right">
-              {value}
+              <CurrencyFormat
+                value={value}
+                displayType={"text"}
+                thousandSeparator={true}
+                suffix={" Birr"}
+              />
             </Grid.Column>
             <Grid.Column width={3}>
               <Icon name="edit" onClick={() => editEntry(id)} bordered />

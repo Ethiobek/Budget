@@ -26,9 +26,6 @@ function ModalEdit({
         />
       </Modal.Content>
       <Modal.Actions>
-        <Button close onClick={() => setIsOpen(false)}>
-          Close
-        </Button>
         <Button onClick={() => setIsOpen(false)} primary>
           <Icon name="save"></Icon>
           Save
